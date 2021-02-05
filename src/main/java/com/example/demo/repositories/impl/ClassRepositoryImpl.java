@@ -15,13 +15,12 @@ public class ClassRepositoryImpl implements ClassRepository {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    private static final String KEY ="class";
-    private static final String KEYS ="classé";
+    private static final String KEY =":class";
     @Override
     public ClassEntity save(ClassEntity classEntity) {
 
         try {
-            redisTemplate.opsForHash().put(KEY,classEntity.getId(),classEntity);
+            redisTemplate.opsForList().rightPush(KEY,classEntity);
             return classEntity;
         }catch (Exception e) {
             return null;
@@ -31,13 +30,14 @@ public class ClassRepositoryImpl implements ClassRepository {
 
     @Override
     public List<ClassEntity> findAll() {
-        return redisTemplate.opsForHash().values(KEY);
+        long size = redisTemplate.opsForList().size(KEY);
+        return redisTemplate.opsForList().range(KEY,0,size);
     }
 
     @Override
     public List<ClassEntity> saveAll(List<ClassEntity> classEntities) {
         try{
-            redisTemplate.opsForList().rightPush(KEYS,classEntities);
+            redisTemplate.opsForList().rightPushAll(KEY,classEntities);
             return classEntities;
         }catch (Exception e){
             return null;

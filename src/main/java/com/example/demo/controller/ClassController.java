@@ -25,13 +25,11 @@ public class ClassController {
     @PutMapping
     public ResponseEntity<ResponseContent<ClassEntity>> update(@RequestParam(value = "id") int id,
                                                               @RequestBody ClassIn classIn) {
-//        return iStudentServicee.update(studentIn);
         return null;
     }
     @DeleteMapping
     public Response delete(@RequestParam(value = "id") int id) {
         return null;
-//        return iStudentServicee.delete(id);
     }
 
     @GetMapping
