@@ -16,6 +16,7 @@ public interface ClassService {
     ResponseEntity<ResponseContent<String>> delete(int id);
 
     ResponseEntity<ResponseContent<List<ClassEntity>>> fingAll();
+    ResponseEntity<ResponseContent<ClassEntity>> findById(String id);
 
     ResponseEntity<ResponseContent<List<ClassEntity>>> createAll(List<ClassIn> classIns);
 }

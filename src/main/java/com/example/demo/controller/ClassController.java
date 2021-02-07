@@ -41,4 +41,11 @@ public class ClassController {
     public ResponseEntity<ResponseContent<List<ClassEntity>>> createAll(@RequestBody List<ClassIn> classIns) {
         return classService.createAll(classIns);
     }
+
+    @GetMapping(value = "/")
+    public ResponseEntity<ResponseContent<ClassEntity>> findById(@RequestParam(value = "id")String id) {
+
+        return classService.findById(id);
+    }
+
 }

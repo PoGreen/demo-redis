@@ -54,6 +54,16 @@ public class ClassServiceImpl implements ClassService {
     }
 
     @Override
+    public ResponseEntity<ResponseContent<ClassEntity>> findById(String id) {
+        ClassEntity entity = classRepository.findById(id);
+        if(Objects.isNull(entity)){
+            return Response.badRequest(HttpMessage.NOT_SUCCESS);
+        }
+        return Response.ok(entity);
+    }
+
+
+    @Override
     public ResponseEntity<ResponseContent<List<ClassEntity>>> createAll(List<ClassIn> classIns) {
         List<ClassEntity> classEntities = classMapper.mapToEntitys(classIns);
         classEntities = classRepository.saveAll(classEntities);
